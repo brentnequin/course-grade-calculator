@@ -3,46 +3,55 @@ import React from "react";
 export default class Item extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
-        this.onInputchange = this.onInputchange.bind(this);
+        this.state = {
+            itemName: this.props.itemName,
+            itemScore: this.props.itemScore,
+            itemScoreMax: this.props.itemScoreMax,
+            itemWeight: this.props.itemWeight,
+        };
+        this.onInputChange = this.onInputChange.bind(this);
     }
 
-    onInputchange(event) {
-        this.setState({
-          [event.target.name]: event.target.value
-        });
-      }
+    onInputChange(e) {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    componentDidUpdate() {
+        if (this.props.onChange) {
+          this.props.onChange(this.state);
+        }
+    }
     
     render() {
         return (
             <div>
                 <input
-                    name="item-name"
+                    name="itemName"
                     type="text"
                     defaultValue={this.props.itemName}
                     placeholder="Item Name"
-                    onChange={this.onInputchange}
+                    onChange={this.onInputChange}
                 />
                 <input
-                    name="item-score"
+                    name="itemScore"
                     type="number"
                     defaultValue={this.props.itemScore}
                     placeholder="Score"
-                    onChange={this.onInputchange}
+                    onChange={this.onInputChange}
                 />
                 <input
-                    name="item-score-max"
+                    name="itemScoreMax"
                     type="number"
                     defaultValue={this.props.itemScoreMax}
                     placeholder="Max"
-                    onChange={this.onInputchange}
+                    onChange={this.onInputChange}
                 />
                 <input
-                    name="item-weight"
+                    name="itemWeight"
                     type="number"
                     defaultValue={this.props.itemWeight}
                     placeholder="Weight"
-                    onChange={this.onInputchange}
+                    onChange={this.onInputChange}
                 />
             </div>
         );
