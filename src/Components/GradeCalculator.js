@@ -23,17 +23,30 @@ export default class GradeCalculator extends React.Component {
             score: 0
         };
         this.onClickAddButton = this.onClickAddButton.bind(this);
-        this.onChangeInput = this.onChangeInput.bind(this);
+        //this.onChangeInput = this.onChangeInput.bind(this);
     }
 
     calculateScore() {
-        return this.state.itemList.reduce((score, item, index) =>
-            score + (item.itemScore / item.itemScoreMax) * (item.itemWeight / 100), 0
+        return this.state.itemList.reduce((score, item) => {
+                if (item.itemName === "" || item.itemScore === "" || item.itemScoreMax === "" || item.itemWeight === "")
+                    return score; // if an item has any empty fields, do not include in computation
+                else
+                    return score + (item.itemScore / item.itemScoreMax) * (item.itemWeight / 100);
+            }, 0
         );
     }
 
     componentDidMount() {
         this.setState({score: this.calculateScore()});
+    }
+
+    componentDidUpdate(prevProp, prevState) {
+        const score = this.calculateScore();
+        const itemList = this.state.itemList;
+        if (prevState.score !== score)
+            this.setState({score: score});
+        if (prevState.itemList !== itemList) 
+            this.setState({itemList: itemList});
     }
 
 
@@ -47,7 +60,13 @@ export default class GradeCalculator extends React.Component {
                 itemWeight: ""
             }]
         });
-        console.log(itemList);
+    }
+
+    onClickDeleteButton(index) {
+        let itemList = this.state.itemList;
+        itemList.splice(index, 1);
+        this.setState({itemList: itemList});
+        console.log(index);
     }
 
     onChangeInput(index, itemProp, newValue) {
@@ -56,7 +75,6 @@ export default class GradeCalculator extends React.Component {
         item[itemProp] = newValue;
         itemList[index] = item;
         this.setState({itemList});
-        this.setState({score: this.calculateScore()});
     }
 
     render() {
@@ -69,6 +87,7 @@ export default class GradeCalculator extends React.Component {
                 itemScoreMax={item.itemScoreMax}
                 itemWeight={item.itemWeight}
                 onChangeInput={this.onChangeInput.bind(this)}
+                onClickDeleteButton={this.onClickDeleteButton.bind(this)}
             />
         );
         return (

@@ -10,7 +10,7 @@ export default class Score extends React.Component {
     
     render() {
         return (
-            <div>Score:{this.props.score}</div>
+            <div>Score: {100*Math.round(this.props.score * 10000) / 10000}%</div>
         );
     }
 }
