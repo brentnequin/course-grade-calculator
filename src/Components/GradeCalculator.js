@@ -81,6 +81,7 @@ export default class GradeCalculator extends React.Component {
 
     componentDidUpdate() {
         localStorage.setItem('itemList', JSON.stringify(this.state.itemList));
+        console.log(this.state.itemList);
     }
 
     onClickAddItemButton(e) {
@@ -124,14 +125,17 @@ export default class GradeCalculator extends React.Component {
         });
     }
 
-    onClickAddGroupItemButton(GroupIndex) {
+    onClickAddGroupItemButton(groupIndex) {
+        console.log(groupIndex);
         let list = this.state.itemList;
+        let groupItem = list.filter(item => item.id === groupIndex)[0];
+        console.log(groupItem);
         let id;
-        if (list[GroupIndex].groupList.length === 0)
+        if (groupItem.groupList.length === 0)
             id = 0;
         else   
-            id = list[GroupIndex].groupList[list[GroupIndex].groupList.length - 1].id + 1;
-        list[GroupIndex].groupList.splice(list[GroupIndex].groupList.length, 0, {
+            id = groupItem.groupList[groupItem.groupList.length - 1].id + 1;
+            groupItem.groupList.splice(groupItem.groupList.length, 0, {
             id: id,
             itemName: "",
             itemScore: "",
@@ -141,36 +145,48 @@ export default class GradeCalculator extends React.Component {
     }
 
     onClickDeleteButton(index) {
+        console.log(index);
         let itemList = this.state.itemList;
         itemList = itemList.filter(item => item.id !== index);
         this.setState({itemList: itemList});
         this.setState({score: this.calculateScore(itemList)})
-        console.log(this.state.itemList);
     }
 
     onClickDeleteButtonGroupItem(groupIndex, itemIndex) {
+        console.log(groupIndex, itemIndex);
         let list = this.state.itemList;
-        let groupList = list[groupIndex].groupList;
+        console.log(list);
+        console.log(groupIndex, itemIndex);
+        console.log(list.filter(item => item.id === groupIndex));
+        let groupList = list.filter(item => item.id === groupIndex)[0].groupList;
+        console.log(groupList);
         groupList = groupList.filter(item => item.id !== itemIndex);
-        list[groupIndex].groupList = groupList;
+        if (groupList.length)
+            list[groupIndex].groupList = groupList;
+        else
+            list = list.filter(item => item.id !== groupIndex);
         this.setState({itemList: list});
         this.setState({score: this.calculateScore(list)})
     }
 
     onChangeInput(index, itemProp, newValue) {
+        console.log(index);
         let itemList = [...this.state.itemList];
-        let item = {...itemList[index]};
+        let item = itemList.filter(item => item.id === index)[0];
+        console.log("item", item);
         item[itemProp] = newValue;
-        itemList[index] = item;
+        itemList.filter(item => item.id === index)[0] = item;
         this.setState({itemList: itemList});
         this.setState({score: this.calculateScore(itemList)})
     }
 
     onChangeInputGroupItem(groupIndex, itemIndex, itemProp, newValue) {
+        console.log(groupIndex, itemIndex);
         let list = [...this.state.itemList];
-        let item = {...list[groupIndex].groupList[itemIndex]};
-        item[itemProp] = newValue;
-        list[groupIndex].groupList[itemIndex] = item;
+        let item = list.filter(item => item.id === groupIndex)[0];
+        let groupItem = item.groupList.filter(item => item.id === itemIndex)[0];
+        groupItem[itemProp] = newValue;
+        list.filter(item => item.id === groupIndex)[0].groupList.filter(item => item.id === itemIndex)[0] = item;
         this.setState({itemList: list});
         this.setState({score: this.calculateScore(list)})
     }
