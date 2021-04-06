@@ -1,6 +1,6 @@
 # Course Grade Calculator
 
-The [Course Grade Calculator](course-grade-calculator.herokuapp.com) is designed to aid the student in determining their current or forseeable grade in an enrolled course.
+The [Course Grade Calculator](https://course-grade-calculator.herokuapp.com) is designed to aid the student in determining their current or forseeable grade in an enrolled course.
 
 The web application calculates the grade percentage from a list of items and item group that contain information corresponding to graded course items.
 
