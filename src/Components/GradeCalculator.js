@@ -76,10 +76,6 @@ export default class GradeCalculator extends React.Component {
     );}
 
     componentDidMount() {
-        if (JSON.parse(localStorage.getItem('itemList'))) {
-            let itemList = JSON.parse(localStorage.getItem('itemList'));
-            this.setState({itemList: itemList});
-        }
         this.setState({score: this.calculateScore(this.state.itemList)});
     }
 
@@ -146,14 +142,17 @@ export default class GradeCalculator extends React.Component {
 
     onClickDeleteButton(index) {
         let itemList = this.state.itemList;
-        itemList.splice(index, 1);
+        itemList = itemList.filter(item => item.id !== index);
         this.setState({itemList: itemList});
         this.setState({score: this.calculateScore(itemList)})
+        console.log(this.state.itemList);
     }
 
-    onClickDeleteButtonGroupItem(GroupIndex, ItemIndex) {
+    onClickDeleteButtonGroupItem(groupIndex, itemIndex) {
         let list = this.state.itemList;
-        list[GroupIndex].groupList.splice(ItemIndex, 1);
+        let groupList = list[groupIndex].groupList;
+        groupList = groupList.filter(item => item.id !== itemIndex);
+        list[groupIndex].groupList = groupList;
         this.setState({itemList: list});
         this.setState({score: this.calculateScore(list)})
     }

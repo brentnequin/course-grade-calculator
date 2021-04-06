@@ -25,7 +25,7 @@ export default class GroupItem extends React.Component {
                     placeholder="Max"
                     onChange={e => {this.props.onChangeInputGroupItem(this.props.groupIndex, this.props.index, e.target.name, e.target.value)} }
                 />
-                <button onClick={() => {this.props.onClickDeleteButtonGroupItem(this.props.index)} }>×</button>
+                <button onClick={() => {this.props.onClickDeleteButtonGroupItem(this.props.groupIndex, this.props.index)} }>×</button>
             </div>
         );
     }

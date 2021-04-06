@@ -3,10 +3,10 @@ import GroupItem from "./GroupItem";
 
 export default class Group extends React.Component {
     render() {
-        const items = this.props.list.map((item, i) =>
+        const items = this.props.list.map((item) =>
             <GroupItem
-                key={item.id} // random number between 0 and 9999
-                index={i}
+                key={item.id}
+                index={item.id}
                 groupIndex={this.props.index}
                 itemName={item.itemName}
                 itemScore={item.itemScore}
