@@ -1,5 +1,10 @@
 import React from "react";
 import GroupItem from "./GroupItem";
+import '../App.css';
+
+const groupStyle = {
+    marginBottom: '10px',
+}
 
 export default class Group extends React.Component {
     render() {
@@ -16,7 +21,7 @@ export default class Group extends React.Component {
             />
         );
         return (
-            <div style={this.props.style}>
+            <div style={groupStyle}>
                 <input
                     name="groupName"
                     type="text"

@@ -7,14 +7,6 @@ function isGroup(item) {
     return "groupList" in item;
 }
 
-const itemStyle = {
-    marginBottom: '10px',
-}
-
-const groupStyle = {
-    marginBottom: '10px',
-}
-
 export default class GradeCalculator extends React.Component {
     constructor(props) {
         super(props);
@@ -205,7 +197,6 @@ export default class GradeCalculator extends React.Component {
                 return <Group
                     key={item.id}
                     index={item.id}
-                    style={groupStyle}
                     list={item.groupList}
                     groupName={item.groupName}
                     groupWeight={item.groupWeight}
@@ -218,7 +209,6 @@ export default class GradeCalculator extends React.Component {
             return <Item
                 key={item.id}
                 index={item.id}
-                style={itemStyle}
                 itemName={item.itemName}
                 itemScore={item.itemScore}
                 itemScoreMax={item.itemScoreMax}

@@ -1,9 +1,13 @@
 import React from "react";
 
+const itemStyle = {
+    marginBottom: '10px',
+}
+
 export default class Item extends React.Component {
     render() {
         return (
-            <div style={this.props.style}>
+            <div style={itemStyle}>
                 <input
                     name="itemName"
                     type="text"
