@@ -16,7 +16,7 @@ export default class Group extends React.Component {
             />
         );
         return (
-            <div>
+            <div style={this.props.style}>
                 <input
                     name="groupName"
                     type="text"
