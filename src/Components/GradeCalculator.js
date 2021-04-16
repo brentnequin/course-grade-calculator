@@ -2,6 +2,8 @@ import React from "react";
 import Group from "./Group";
 import Item from "./Item";
 import Score from "./Score";
+import { Button } from '@material-ui/core';
+import styled from 'styled-components';
 
 function isGroup(item) {
     return "groupList" in item;
@@ -221,9 +223,13 @@ export default class GradeCalculator extends React.Component {
             <div>
                 <Score score={this.state.score} />
                 <div>{items}</div>
-                <button onClick={this.onClickAddItemButton}>Add Item</button>
-                <button onClick={this.onClickAddGroupButton}>Add Group</button>
+                <MenuButton className="button-menu-add" variant="contained" onClick={this.onClickAddItemButton}>Add Item</MenuButton>
+                <MenuButton className="button-menu-add" variant="contained" onClick={this.onClickAddGroupButton}>Add Group</MenuButton>
             </div>
         );
     }
 }
+
+const MenuButton = styled(Button)`
+    margin-right: 10px;
+`;

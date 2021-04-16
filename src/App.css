@@ -1,18 +1,23 @@
+h1 {
+  margin: 0;
+}
+
 .App {
-  width: 100%;
-  height: 100%;
+  background-color: #333;
 }
 
 .App-header {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 10vh;
 }
 
 .App-main {
   display: flex;
-  align-items: center;
   justify-content: center;
+  min-height: 80vh;
+  margin: 0 10px;
 }
 
 .App-footer {
@@ -20,11 +25,63 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 10vh;
 }
 
-.App-link {
+.header-wrapper {
+  margin: 1em 3em;
+}
+
+.footer-wrapper {
+  margin: 10px 50px;
+}
+
+.item-wrapper {
+  margin: 10px;
+  padding: 10px;
+}
+
+.groupName-wrapper {
+  margin: 10px;
+  padding: 10px;
+}
+
+.groupItems-wrapper {
+  margin: 10px 30px;
+  padding: 0px 10px 10px 10px;
+}
+
+.groupItem-wrapper {
+  margin: 10px;
+  padding: 10px;
 }
 
 .item:not(:last) {
   margin-bottom: 10px;
+}
+
+.score-box {
+  width: 100px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-item-delete,
+.button-groupItem-add {
+  float: right;
+}
+
+.button-menu-add-root {
+  margin: 10px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outside-spin-button {
+  display: none;
+}
+
+.input-itemScore {
+  direction: rtl;
 }
