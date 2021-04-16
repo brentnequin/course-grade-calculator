@@ -83,7 +83,6 @@ export default class GradeCalculator extends React.Component {
 
     componentDidUpdate() {
         localStorage.setItem('itemList', JSON.stringify(this.state.itemList));
-        console.log(this.state.itemList);
     }
 
     onClickAddItemButton(e) {
@@ -128,7 +127,6 @@ export default class GradeCalculator extends React.Component {
     }
 
     onClickAddGroupItemButton(groupIndex) {
-        console.log(groupIndex);
         let list = this.state.itemList;
         let groupItem = list.filter(item => item.id === groupIndex)[0];
         console.log(groupItem);
@@ -155,11 +153,7 @@ export default class GradeCalculator extends React.Component {
     }
 
     onClickDeleteButtonGroupItem(groupIndex, itemIndex) {
-        console.log(groupIndex, itemIndex);
         let list = this.state.itemList;
-        console.log(list);
-        console.log(groupIndex, itemIndex);
-        console.log(list.filter(item => item.id === groupIndex));
         let groupList = list.filter(item => item.id === groupIndex)[0].groupList;
         console.log(groupList);
         groupList = groupList.filter(item => item.id !== itemIndex);
@@ -172,7 +166,6 @@ export default class GradeCalculator extends React.Component {
     }
 
     onChangeInput(index, itemProp, newValue) {
-        console.log(index);
         let itemList = [...this.state.itemList];
         let item = itemList.filter(item => item.id === index)[0];
         console.log("item", item);
@@ -183,7 +176,6 @@ export default class GradeCalculator extends React.Component {
     }
 
     onChangeInputGroupItem(groupIndex, itemIndex, itemProp, newValue) {
-        console.log(groupIndex, itemIndex);
         let list = [...this.state.itemList];
         let item = list.filter(item => item.id === groupIndex)[0];
         let groupItem = item.groupList.filter(item => item.id === itemIndex)[0];
