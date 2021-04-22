@@ -21,9 +21,6 @@ export default class Score extends React.Component {
             </ScoreBox>
         );
     }
-    componentDidUpdate() {
-        console.log(Math.round(this.props.score*100));
-    }
 }
 
 const ScoreBox = styled(Paper)`

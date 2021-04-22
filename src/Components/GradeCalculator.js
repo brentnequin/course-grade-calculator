@@ -58,7 +58,7 @@ export default class GradeCalculator extends React.Component {
                     if (item.groupName === "" || item.groupWeight === "")
                         return score;
                     else
-                        return this.calculateGroupScore(item);
+                        return score + this.calculateGroupScore(item);
                 }
                 else if (item.itemName === "" || item.itemScore === "" || item.itemScoreMax === "" || item.itemWeight === "")
                     return score; // if an item has any empty fields, do not include in computation
@@ -155,7 +155,6 @@ export default class GradeCalculator extends React.Component {
     onClickDeleteButtonGroupItem(groupIndex, itemIndex) {
         let list = this.state.itemList;
         let groupList = list.filter(item => item.id === groupIndex)[0].groupList;
-        console.log(groupList);
         groupList = groupList.filter(item => item.id !== itemIndex);
         if (groupList.length)
             list[groupIndex].groupList = groupList;
@@ -168,11 +167,11 @@ export default class GradeCalculator extends React.Component {
     onChangeInput(index, itemProp, newValue) {
         let itemList = [...this.state.itemList];
         let item = itemList.filter(item => item.id === index)[0];
-        console.log("item", item);
         item[itemProp] = newValue;
         itemList.filter(item => item.id === index)[0] = item;
         this.setState({itemList: itemList});
         this.setState({score: this.calculateScore(itemList)})
+        console.log(this.calculateScore(itemList));
     }
 
     onChangeInputGroupItem(groupIndex, itemIndex, itemProp, newValue) {
@@ -182,7 +181,8 @@ export default class GradeCalculator extends React.Component {
         groupItem[itemProp] = newValue;
         list.filter(item => item.id === groupIndex)[0].groupList.filter(item => item.id === itemIndex)[0] = item;
         this.setState({itemList: list});
-        this.setState({score: this.calculateScore(list)})
+        this.setState({score: this.calculateScore(list)});
+        console.log(this.calculateScore(list));
     }
 
     render() {
