@@ -21,19 +21,22 @@ export default class Group extends React.Component {
             <Paper elevation={3}>
                 <div className="groupName-wrapper">
                     <InputBase 
+                        className="input-groupName"
                         name="groupName"
                         type="text"
                         defaultValue={this.props.groupName}
                         placeholder="Group Name"
                         onChange={e => {this.props.onChangeInput(this.props.index, e.target.name, e.target.value)} }
                     />
-                    <InputBase 
+                    <InputBase
+                        className="input-groupWeight"
                         name="groupWeight"
                         type="number"
+                        inputProps={{ style: {textAlign: 'right'} }}
                         defaultValue={this.props.groupWeight}
                         placeholder="Weight"
                         onChange={e => {this.props.onChangeInput(this.props.index, e.target.name, e.target.value)} }
-                    />
+                    />%
                     <Button className="button-item-delete" onClick={() => {this.props.onClickDeleteButton(this.props.index)} }>×</Button>
                     <Button className="button-groupItem-add" onClick={() => {this.props.onClickAddGroupItemButton(this.props.index)}} >Add Item</Button>
                 </div>

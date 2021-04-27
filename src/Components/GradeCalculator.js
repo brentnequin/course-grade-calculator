@@ -60,7 +60,7 @@ export default class GradeCalculator extends React.Component {
                     else
                         return score + this.calculateGroupScore(item);
                 }
-                else if (item.itemName === "" || item.itemScore === "" || item.itemScoreMax === "" || item.itemWeight === "")
+                else if (item.itemName === "" || item.itemScore === "" || item.itemScoreMax === "" || item.itemScoreMax === 0  || item.itemWeight === "")
                     return score; // if an item has any empty fields, do not include in computation
                 else
                     return score + (item.itemScore / item.itemScoreMax) * (item.itemWeight / 100);
@@ -70,7 +70,7 @@ export default class GradeCalculator extends React.Component {
     
     calculateGroupScore(group) {
         return group.groupList.reduce((score, item) => {
-            if (item.itemName === "" || item.itemScore === "" || item.itemScoreMax === "")
+            if (item.itemName === "" || item.itemScore === "" || item.itemScoreMax === "" || item.itemScoreMax === 0)
                 return score; // if an item has any empty fields, do not include in computation
             else
                 return score + (item.itemScore / item.itemScoreMax) * (group.groupWeight / group.groupList.length / 100);
@@ -129,13 +129,12 @@ export default class GradeCalculator extends React.Component {
     onClickAddGroupItemButton(groupIndex) {
         let list = this.state.itemList;
         let groupItem = list.filter(item => item.id === groupIndex)[0];
-        console.log(groupItem);
         let id;
         if (groupItem.groupList.length === 0)
             id = 0;
         else   
             id = groupItem.groupList[groupItem.groupList.length - 1].id + 1;
-            groupItem.groupList.splice(groupItem.groupList.length, 0, {
+        groupItem.groupList.splice(groupItem.groupList.length, 0, {
             id: id,
             itemName: "",
             itemScore: "",
@@ -145,7 +144,6 @@ export default class GradeCalculator extends React.Component {
     }
 
     onClickDeleteButton(index) {
-        console.log(index);
         let itemList = this.state.itemList;
         itemList = itemList.filter(item => item.id !== index);
         this.setState({itemList: itemList});
@@ -171,7 +169,6 @@ export default class GradeCalculator extends React.Component {
         itemList.filter(item => item.id === index)[0] = item;
         this.setState({itemList: itemList});
         this.setState({score: this.calculateScore(itemList)})
-        console.log(this.calculateScore(itemList));
     }
 
     onChangeInputGroupItem(groupIndex, itemIndex, itemProp, newValue) {
@@ -182,7 +179,6 @@ export default class GradeCalculator extends React.Component {
         list.filter(item => item.id === groupIndex)[0].groupList.filter(item => item.id === itemIndex)[0] = item;
         this.setState({itemList: list});
         this.setState({score: this.calculateScore(list)});
-        console.log(this.calculateScore(list));
     }
 
     render() {

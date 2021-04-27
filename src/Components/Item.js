@@ -15,30 +15,35 @@ export default class Item extends React.Component {
                         placeholder="Item Name"
                         onChange={e => {this.props.onChangeInput(this.props.index, e.target.name, e.target.value)} }
                     />
-                    <InputBase
-                        className="input-itemScore"
-                        name="itemScore"
-                        type="number"
-                        defaultValue={this.props.itemScore}
-                        placeholder="Score"
-                        onChange={e => {this.props.onChangeInput(this.props.index, e.target.name, e.target.value)} }
-                    />
-                    /
-                    <InputBase
-                        name="itemScoreMax"
-                        type="number"
-                        defaultValue={this.props.itemScoreMax}
-                        placeholder="Max"
-                        onChange={e => {this.props.onChangeInput(this.props.index, e.target.name, e.target.value)} }
-                    />
                     <InputBase 
+                        className="input-itemWeight"
                         name="itemWeight"
                         type="number"
+                        inputProps={{ style: {textAlign: 'right'} }}
                         defaultValue={this.props.itemWeight}
                         placeholder="Weight"
                         onChange={e => {this.props.onChangeInput(this.props.index, e.target.name, e.target.value)} }
-                    />
+                    />%
                     <Button className="button-item-delete" onClick={() => {this.props.onClickDeleteButton(this.props.index)} }>×</Button>
+                    <div className="itemScore">
+                        <InputBase
+                            className="input-itemScore"
+                            name="itemScore"
+                            type="number"
+                            inputProps={{ style: {textAlign: 'right'} }}
+                            defaultValue={this.props.itemScore}
+                            placeholder="Score"
+                            onChange={e => {this.props.onChangeInput(this.props.index, e.target.name, e.target.value)} }
+                        />/
+                        <InputBase
+                            className="input-itemScoreMax"
+                            name="itemScoreMax"
+                            type="number"
+                            defaultValue={this.props.itemScoreMax}
+                            placeholder="Max"
+                            onChange={e => {this.props.onChangeInput(this.props.index, e.target.name, e.target.value)} }
+                        />
+                    </div>
                 </div>
             </Paper>
         );
